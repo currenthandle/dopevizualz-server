@@ -3,8 +3,10 @@ const bodyParser = require('body-parser')
 const connect = require('./database.js')
 
 const app = express()
+console.log('hello world')
 
 const PORT = process.env.PORT || 3000
+console.log('PORT', PORT)
 app.use(bodyParser.json())
 
 app.get('/preset', async (req, res) => {
