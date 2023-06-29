@@ -4,6 +4,7 @@ const connect = require('./database.js')
 
 const app = express()
 
+const PORT = process.env.PORT || 3000
 app.use(bodyParser.json())
 
 app.get('/preset', async (req, res) => {
@@ -18,6 +19,6 @@ app.post('/preset', async (req, res) => {
   res.json(preset)
 })
 
-app.listen(3000, () => {
-  console.log('listening on 3000')
+app.listen(PORT, () => {
+  console.log(`listening on ${PORT}`)
 })
