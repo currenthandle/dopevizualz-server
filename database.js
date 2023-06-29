@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb')
 
-const url = process.env.DB_URL
+// const url = process.env.DB_URL
+const url = process.env.MONGODB_URI
 const client = new MongoClient(url)
 
 const dbName = 'dopevisualz'
