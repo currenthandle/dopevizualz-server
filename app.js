@@ -5,6 +5,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const connect = require('./database.js')
 const cors = require('cors')
+const { ObjectId } = require('mongodb')
 
 const app = express()
 app.use(cors())
@@ -22,7 +23,9 @@ app.get('/preset', async (req, res) => {
 
 app.get('/preset/:id', async (req, res) => {
   const db = await connect()
-  const preset = await db.collection('presets').findOne({ _id: req.params.id })
+  const preset = await db
+    .collection('presets')
+    .findOne({ _id: new ObjectId(req.params.id) })
   res.json(preset)
 })
 
