@@ -50,6 +50,15 @@ app.delete('/preset/:id', async (req, res) => {
   res.json(preset)
 })
 
+// untested
+app.put('/preset/:id', async (req, res) => {
+  const db = await connect()
+  const preset = await db
+    .collection('presets')
+    .updateOne({ _id: new ObjectId(req.params.id) }, { $set: { ...req.body } })
+  res.json(preset)
+})
+
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`)
 })
