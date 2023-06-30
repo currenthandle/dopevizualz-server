@@ -15,19 +15,18 @@ app.use(bodyParser.json({ limit: '1000kb' }))
 // post the presets to the database api
 
 app.get('/preset', async (req, res) => {
-  console.log('inciminbg')
   const db = await connect()
   const presets = await db.collection('presets').find().toArray()
-  console.log('presets', presets)
-  // res.json(presets)
-  // send the response as json but set everything necessary for CORS
-  // headers , etc...
   res.json(presets)
 })
 
+app.get('/preset/:id', async (req, res) => {
+  const db = await connect()
+  const preset = await db.collection('presets').findOne({ _id: req.params.id })
+  res.json(preset)
+})
+
 app.post('/preset', async (req, res) => {
-  console.log('req.body', req.body)
-  console.log('inciminbg')
   const db = await connect()
   const preset = await db.collection('presets').insertOne(req.body)
   res.json(preset[0])
