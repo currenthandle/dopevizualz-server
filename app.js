@@ -35,6 +35,21 @@ app.post('/preset', async (req, res) => {
   res.json(preset[0])
 })
 
+app.delete('/preset', async (req, res) => {
+  const db = await connect()
+  const preset = await db.collection('presets').deleteMany()
+
+  res.json(preset)
+})
+
+app.delete('/preset/:id', async (req, res) => {
+  const db = await connect()
+  const preset = await db
+    .collection('presets')
+    .deleteOne({ _id: new ObjectId(req.params.id) })
+  res.json(preset)
+})
+
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`)
 })
